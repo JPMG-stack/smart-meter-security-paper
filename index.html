@@ -771,6 +771,167 @@
             transform: translateY(-3px);
         }
 
+        /* ========== INTERACTIVE AVATAR STYLES ========== */
+        .avatar-container {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 15px;
+        }
+
+        .avatar-speech-bubble {
+            background: white;
+            border-radius: 20px;
+            padding: 20px;
+            max-width: 320px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+            position: relative;
+            animation: slideInRight 0.4s ease-out;
+            border: 3px solid var(--primary);
+            display: none;
+        }
+
+        .avatar-speech-bubble.active {
+            display: block;
+        }
+
+        .avatar-speech-bubble::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            right: 60px;
+            width: 20px;
+            height: 20px;
+            background: white;
+            border-bottom: 3px solid var(--primary);
+            border-right: 3px solid var(--primary);
+            transform: rotate(45deg);
+        }
+
+        .avatar-speech-bubble .speech-text {
+            color: var(--dark);
+            font-size: 0.95em;
+            line-height: 1.5;
+            margin-bottom: 12px;
+        }
+
+        .avatar-speech-bubble .speech-actions {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .avatar-speech-bubble .speech-actions button {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.85em;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .btn-speak {
+            background: var(--gradient-primary);
+            color: white;
+        }
+
+        .btn-speak:hover {
+            transform: scale(1.05);
+        }
+
+        .btn-close {
+            background: #e0e0e0;
+            color: var(--dark);
+        }
+
+        .btn-close:hover {
+            background: #d0d0d0;
+        }
+
+        .avatar-button {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: var(--gradient-accent);
+            border: 4px solid white;
+            box-shadow: 0 6px 24px rgba(255,102,0,0.4);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+            position: relative;
+            animation: bounce 2s infinite;
+        }
+
+        .avatar-button:hover {
+            transform: scale(1.1);
+            animation: none;
+        }
+
+        .avatar-button.speaking {
+            animation: pulse-avatar 1s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes pulse-avatar {
+            0%, 100% { box-shadow: 0 6px 24px rgba(255,102,0,0.4), 0 0 0 0 rgba(255,102,0,0.7); }
+            50% { box-shadow: 0 6px 24px rgba(255,102,0,0.4), 0 0 0 20px rgba(255,102,0,0); }
+        }
+
+        .avatar-button img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .avatar-button i {
+            font-size: 2em;
+            color: white;
+        }
+
+        .avatar-tooltip {
+            position: absolute;
+            right: 85px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--dark);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 8px;
+            font-size: 0.85em;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: var(--transition);
+        }
+
+        .avatar-button:hover .avatar-tooltip {
+            opacity: 1;
+            right: 90px;
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
         /* Mobile Responsive */
         @media (max-width: 992px) {
             .hero-content {
@@ -797,6 +958,16 @@
             .hero-image img,
             .hero-image-placeholder {
                 max-width: 80%;
+            }
+
+            .avatar-container {
+                bottom: 20px;
+                right: 20px;
+            }
+
+            .avatar-speech-bubble {
+                max-width: 280px;
+                right: -50px;
             }
         }
 
@@ -825,6 +996,23 @@
                 flex-direction: column;
                 align-items: center;
             }
+
+            .avatar-speech-bubble {
+                max-width: 250px;
+                padding: 15px;
+            }
+
+            .avatar-button {
+                width: 60px;
+                height: 60px;
+            }
+
+            .avatar-button img,
+            .avatar-button i {
+                width: 50px;
+                height: 50px;
+                font-size: 1.5em;
+            }
         }
 
         @media (max-width: 480px) {
@@ -838,6 +1026,10 @@
 
             .authors-grid {
                 grid-template-columns: 1fr;
+            }
+
+            .avatar-tooltip {
+                display: none;
             }
         }
 
@@ -888,7 +1080,7 @@
     </nav>
 
     <!-- Hero Section -->
-    <header>
+    <header id="overview">
         <div class="container">
             <div class="hero-content">
                 <div class="hero-text">
@@ -1213,14 +1405,170 @@
         </div>
     </footer>
 
+    <!-- ========== INTERACTIVE AVATAR ========== -->
+    <div class="avatar-container">
+        <div class="avatar-speech-bubble" id="avatarSpeech">
+            <div class="speech-text" id="speechText">
+                ¡Hola! Soy tu asistente virtual. Estoy aquí para ayudarte a navegar por esta investigación sobre ciberseguridad en medidores inteligentes.
+            </div>
+            <div class="speech-actions">
+                <button class="btn-speak" onclick="avatarSpeak()">
+                    <i class="fas fa-volume-up"></i> Escuchar
+                </button>
+                <button class="btn-close" onclick="closeAvatarSpeech()">
+                    <i class="fas fa-times"></i> Cerrar
+                </button>
+            </div>
+        </div>
+        <div class="avatar-button" id="avatarButton" onclick="toggleAvatar()">
+            <i class="fas fa-robot"></i>
+            <span class="avatar-tooltip">¡Haz clic para ayuda!</span>
+        </div>
+    </div>
+
     <!-- Scroll Progress Script -->
     <script>
+        // ========== AVATAR INTERACTIVE FUNCTIONS ==========
+        let currentSection = 'overview';
+        let isSpeaking = false;
+        let speechSynthesis = window.speechSynthesis;
+        let currentUtterance = null;
+
+        // Avatar messages for each section
+        const avatarMessages = {
+            overview: {
+                text: "¡Bienvenido! Esta investigación evalúa la seguridad de medidores inteligentes contra ciberataques. Descubre vulnerabilidades críticas en infraestructura AMI y soluciones de detección basadas en machine learning.",
+                title: "Overview"
+            },
+            authors: {
+                text: "Este trabajo fue desarrollado por investigadores de la Universidad de Texas Rio Grande Valley y la Universidad de Indianapolis, con apoyo de NSF y DHS.",
+                title: "Authors"
+            },
+            findings: {
+                text: "Nuestros hallazgos revelan que los ataques MitM causan pérdidas de más de $9,000 por evento. Las tecnologías inalámbricas como RF Mesh y ZigBee tienen tiempos de recuperación de más de 5 horas. ¡Resultados alarmantes!",
+                title: "Key Findings"
+            },
+            download: {
+                text: "Puedes descargar el artículo completo en formato DOCX o explorar el código en GitHub. El artículo es una versión preprint antes de su publicación final en IEEE Xplore.",
+                title: "Download"
+            },
+            citation: {
+                text: "Si usas esta investigación, por favor cítala correctamente. También puedes contactarnos para colaboraciones o preguntas. ¡Tu feedback es valioso!",
+                title: "Citation"
+            }
+        };
+
+        // Initialize avatar on page load
+        window.addEventListener('load', function() {
+            setTimeout(() => {
+                showAvatarMessage('overview');
+            }, 2000);
+        });
+
+        // Track scroll and update avatar
         window.addEventListener('scroll', function() {
+            updateScrollProgress();
+            detectCurrentSection();
+        });
+
+        function updateScrollProgress() {
             const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
             const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
             const scrolled = (winScroll / height) * 100;
             document.getElementById('scrollProgress').style.width = scrolled + '%';
-        });
+        }
+
+        function detectCurrentSection() {
+            const sections = ['overview', 'authors', 'findings', 'download', 'citation'];
+            const scrollPosition = window.scrollY + 200;
+
+            for (let section of sections) {
+                const element = document.getElementById(section);
+                if (element && element.offsetTop <= scrollPosition && (element.offsetTop + element.offsetHeight) > scrollPosition) {
+                    if (currentSection !== section) {
+                        currentSection = section;
+                        showAvatarMessage(section);
+                    }
+                    break;
+                }
+            }
+        }
+
+        function showAvatarMessage(section) {
+            const message = avatarMessages[section];
+            if (message) {
+                const speechBubble = document.getElementById('avatarSpeech');
+                const speechText = document.getElementById('speechText');
+                
+                speechText.innerHTML = `<strong>${message.title}:</strong><br>${message.text}`;
+                speechBubble.classList.add('active');
+                
+                // Auto-hide after 10 seconds
+                setTimeout(() => {
+                    if (speechBubble.classList.contains('active')) {
+                        closeAvatarSpeech();
+                    }
+                }, 10000);
+            }
+        }
+
+        function toggleAvatar() {
+            const speechBubble = document.getElementById('avatarSpeech');
+            if (speechBubble.classList.contains('active')) {
+                closeAvatarSpeech();
+            } else {
+                showAvatarMessage(currentSection);
+            }
+        }
+
+        function closeAvatarSpeech() {
+            const speechBubble = document.getElementById('avatarSpeech');
+            speechBubble.classList.remove('active');
+            stopSpeaking();
+        }
+
+        function avatarSpeak() {
+            if (isSpeaking) {
+                stopSpeaking();
+                return;
+            }
+
+            const text = document.getElementById('speechText').innerText;
+            
+            // Remove the "Title:" prefix for cleaner speech
+            const cleanText = text.replace(/^.*?:\s*/, '');
+            
+            currentUtterance = new SpeechSynthesisUtterance(cleanText);
+            currentUtterance.lang = 'en-US';
+            currentUtterance.rate = 0.9;
+            currentUtterance.pitch = 1;
+            currentUtterance.volume = 1;
+
+            currentUtterance.onstart = function() {
+                isSpeaking = true;
+                document.getElementById('avatarButton').classList.add('speaking');
+            };
+
+            currentUtterance.onend = function() {
+                isSpeaking = false;
+                document.getElementById('avatarButton').classList.remove('speaking');
+            };
+
+            currentUtterance.onerror = function() {
+                isSpeaking = false;
+                document.getElementById('avatarButton').classList.remove('speaking');
+            };
+
+            speechSynthesis.speak(currentUtterance);
+        }
+
+        function stopSpeaking() {
+            if (speechSynthesis) {
+                speechSynthesis.cancel();
+                isSpeaking = false;
+                document.getElementById('avatarButton').classList.remove('speaking');
+            }
+        }
 
         // Smooth scroll for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
