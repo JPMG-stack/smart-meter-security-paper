@@ -1302,7 +1302,7 @@
                     <a href="./ieee_smart_meter.docx" class="btn-download">
                         <i class="fas fa-file-word"></i> Download DOCX
                     </a>
-                    <a href="https://github.com/JPMG-stack/smart-meter-security-paper" class="btn-outline">
+                    <a href="https://github.com/TU_USUARIO/smart-meter-security-paper" class="btn-outline">
                         <i class="fab fa-github"></i> View Repository
                     </a>
                 </div>
@@ -1340,7 +1340,7 @@
                     <a href="https://ieeexplore.ieee.org" class="btn btn-secondary" target="_blank">
                         <i class="fas fa-book"></i> IEEE Xplore
                     </a>
-                    <a href="https://github.com/JPMG-stack/smart-meter-security-paper" class="btn btn-secondary" target="_blank">
+                    <a href="https://github.com/TU_USUARIO/smart-meter-security-paper" class="btn btn-secondary" target="_blank">
                         <i class="fab fa-github"></i> GitHub Repository
                     </a>
                 </div>
@@ -1352,7 +1352,7 @@
                 <div class="highlight-box">
                     <ul>
                         <li><i class="fas fa-envelope"></i> <strong>Email:</strong> oscar.a.alvarez02@utrgv.edu</li>
-                        <li><i class="fab fa-github"></i> <strong>GitHub:</strong> github.com/JPMG-stack</li>
+                        <li><i class="fab fa-github"></i> <strong>GitHub:</strong> github.com/TU_USUARIO</li>
                         <li><i class="fas fa-university"></i> <strong>Institution:</strong> University of Texas Rio Grande Valley</li>
                         <li><i class="fas fa-award"></i> <strong>Funding:</strong> NSF Award No. 2334389 & DHS S&T Directorate</li>
                     </ul>
@@ -1396,7 +1396,7 @@
                     This research was supported by NSF Award No. 2334389 and DHS Science & Technology Directorate.
                 </p>
                 <div class="social-links">
-                    <a href="https://github.com/JPMG-stack" target="_blank"><i class="fab fa-github"></i></a>
+                    <a href="https://github.com/TU_USUARIO" target="_blank"><i class="fab fa-github"></i></a>
                     <a href="https://scholar.google.com" target="_blank"><i class="fas fa-graduation-cap"></i></a>
                     <a href="https://www.linkedin.com" target="_blank"><i class="fab fa-linkedin-in"></i></a>
                     <a href="mailto:oscar.a.alvarez02@utrgv.edu"><i class="fas fa-envelope"></i></a>
@@ -1409,20 +1409,20 @@
     <div class="avatar-container">
         <div class="avatar-speech-bubble" id="avatarSpeech">
             <div class="speech-text" id="speechText">
-                ¡Hola! Soy tu asistente virtual. Estoy aquí para ayudarte a navegar por esta investigación sobre ciberseguridad en medidores inteligentes.
+                Olá! Sou seu assistente virtual. Estou aqui para ajudá-lo a navegar por esta pesquisa sobre segurança cibernética em medidores inteligentes.
             </div>
             <div class="speech-actions">
                 <button class="btn-speak" onclick="avatarSpeak()">
-                    <i class="fas fa-volume-up"></i> Escuchar
+                    <i class="fas fa-volume-up"></i> Ouvir
                 </button>
                 <button class="btn-close" onclick="closeAvatarSpeech()">
-                    <i class="fas fa-times"></i> Cerrar
+                    <i class="fas fa-times"></i> Fechar
                 </button>
             </div>
         </div>
         <div class="avatar-button" id="avatarButton" onclick="toggleAvatar()">
             <i class="fas fa-robot"></i>
-            <span class="avatar-tooltip">¡Haz clic para ayuda!</span>
+            <span class="avatar-tooltip">Clique para ajuda!</span>
         </div>
     </div>
 
@@ -1434,27 +1434,27 @@
         let speechSynthesis = window.speechSynthesis;
         let currentUtterance = null;
 
-        // Avatar messages for each section
+        // Avatar messages for each section (in Portuguese)
         const avatarMessages = {
             overview: {
-                text: "¡Bienvenido! Esta investigación evalúa la seguridad de medidores inteligentes contra ciberataques. Descubre vulnerabilidades críticas en infraestructura AMI y soluciones de detección basadas en machine learning.",
-                title: "Overview"
+                text: "Bem-vindo! Esta pesquisa avalia a segurança de medidores inteligentes contra ciberataques. Descubra vulnerabilidades críticas em infraestrutura AMI e soluções de detecção baseadas em aprendizado de máquina.",
+                title: "Visão Geral"
             },
             authors: {
-                text: "Este trabajo fue desarrollado por investigadores de la Universidad de Texas Rio Grande Valley y la Universidad de Indianapolis, con apoyo de NSF y DHS.",
-                title: "Authors"
+                text: "Este trabalho foi desenvolvido por pesquisadores da Universidade do Texas Rio Grande Valley e da Universidade de Indianápolis, com apoio da NSF e DHS.",
+                title: "Autores"
             },
             findings: {
-                text: "Nuestros hallazgos revelan que los ataques MitM causan pérdidas de más de $9,000 por evento. Las tecnologías inalámbricas como RF Mesh y ZigBee tienen tiempos de recuperación de más de 5 horas. ¡Resultados alarmantes!",
-                title: "Key Findings"
+                text: "Nossas descobertas revelam que ataques MitM causam perdas de mais de 9 mil dólares por evento. Tecnologias sem fio como RF Mesh e ZigBee têm tempos de recuperação de mais de 5 horas. Resultados alarmantes!",
+                title: "Principais Descobertas"
             },
             download: {
-                text: "Puedes descargar el artículo completo en formato DOCX o explorar el código en GitHub. El artículo es una versión preprint antes de su publicación final en IEEE Xplore.",
+                text: "Você pode baixar o artigo completo em formato DOCX ou explorar o código no GitHub. O artigo é uma versão preprint antes de sua publicação final no IEEE Xplore.",
                 title: "Download"
             },
             citation: {
-                text: "Si usas esta investigación, por favor cítala correctamente. También puedes contactarnos para colaboraciones o preguntas. ¡Tu feedback es valioso!",
-                title: "Citation"
+                text: "Se você usar esta pesquisa, por favor cite-a corretamente. Você também pode entrar em contato conosco para colaborações ou perguntas. Seu feedback é valioso!",
+                title: "Citação"
             }
         };
 
@@ -1539,8 +1539,8 @@
             const cleanText = text.replace(/^.*?:\s*/, '');
             
             currentUtterance = new SpeechSynthesisUtterance(cleanText);
-            currentUtterance.lang = 'en-US';
-            currentUtterance.rate = 0.9;
+            currentUtterance.lang = 'pt-BR';  // Brazilian Portuguese
+            currentUtterance.rate = 0.95;
             currentUtterance.pitch = 1;
             currentUtterance.volume = 1;
 
